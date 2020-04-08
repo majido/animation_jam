@@ -1,0 +1,7 @@
+// import Whatever from 'https://unpkg.com/whatever'
+// import Whatever from 'whatever'
+
+// import { default as index_css }  from './css/index.css'
+console.info(index_css);
+console.log('💀🤘');
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYnVuZGxlLmpzIiwic291cmNlcyI6WyJqcy9pbmRleC5qcyJdLCJzb3VyY2VzQ29udGVudCI6WyIvLyBpbXBvcnQgV2hhdGV2ZXIgZnJvbSAnaHR0cHM6Ly91bnBrZy5jb20vd2hhdGV2ZXInXG4vLyBpbXBvcnQgV2hhdGV2ZXIgZnJvbSAnd2hhdGV2ZXInXG5cbi8vIGltcG9ydCB7IGRlZmF1bHQgYXMgaW5kZXhfY3NzIH0gIGZyb20gJy4vY3NzL2luZGV4LmNzcydcbmNvbnNvbGUuaW5mbyhpbmRleF9jc3MpXG5jb25zb2xlLmxvZygn8J+SgPCfpJgnKSJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtBQUNBO0FBQ0E7QUFDQTtBQUNBLE9BQU8sQ0FBQyxJQUFJLENBQUMsU0FBUyxFQUFDO0FBQ3ZCLE9BQU8sQ0FBQyxHQUFHLENBQUMsTUFBTSJ9
