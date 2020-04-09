@@ -12,14 +12,15 @@
     <link rel="stylesheet" href="bundle.css">
   </head>
   <body>
-    <section id="content">
-      <div class="box">One</div>
-      <div class="box">Two</div>
-      <div class="box">Three</div>
+    <section id="sandbox">
+      <div class="box" id="example">One</div>
     </section>
 
     <section id="app">
-      This should be filled with my preact app!
+      Timeline 
+      <input id="play" type="button" value="Play ▶" alt="Play"></button>
+      <input id="timeline" type="range" min=0 max=100></input>
+      
     </section>
 
     <script src="bundle.js" type="module" defer></script>
