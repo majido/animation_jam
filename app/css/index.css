@@ -11,6 +11,8 @@
   --light: hsl(120 50% 50%);
   --border: hsl(290 80% 55%);
 
+  --timeline-width: 90%;
+
   @media (prefers-color-scheme: light) {
     --surface: gray(98);
     --text: gray(30);
@@ -55,12 +57,12 @@ body {
   backdrop-filter: blur(15px);
 
   & #timeline {
-    width: 90%;
+    width: var(--timeline-width);
   }
 
   & #animations {
     list-style-type: none;
-    padding: 0 0 0 10px;
+    padding: 0 0 0 0px;
     margin: 0;
     & li {
       border-bottom: 1px dashed grey;
@@ -68,17 +70,18 @@ body {
   }
 
   & .keyframes svg {
-    padding: 0 10%;
+    padding: 0;
+    width: var(--timeline-width);
     height: 40px; 
   }
 
   /* Adjust first and last child so they are inside */
   & .keyframes svg circle[cx="0%"] {
-    transform: translateX(10px);
+    transform: translateX(6px);
   }
 
   & .keyframes svg circle[cx="100%"] {
-    transform: translateX(-10px);
+    transform: translateX(-6px);
   }
 
 }

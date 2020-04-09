@@ -40,7 +40,7 @@ for (let box of sandbox.querySelectorAll(".box")) {
   box.animate(
       { transform : ['translateX(-100px)','translateX(100px)'] },
       {
-          duration: 3000, direction: "alternate",
+          duration: 3000,
           iterations: Infinity // TODO: try infinity
       });
 }
@@ -105,8 +105,10 @@ function isAncestor(ancestor, node) {
 }
 
 function selectElement(element) {
-  if (targetedElement)
+  if (targetedElement) {
     targetedElement.removeEventListener('pointerdown', dragStart);
+    targetedElement.style.outline = '';
+  }
   if (selectedElement) {
     if (!isAncestor(element, selectedElement))
       selectedElement = element;
@@ -118,8 +120,10 @@ function selectElement(element) {
   // TODO: Allow creating animations on new nodes.
   while (targetedElement && targetedElement.getAnimations().length == 0)
     targetedElement = targetedElement.parentElement;
-  if (targetedElement)
+  if (targetedElement) {
     targetedElement.addEventListener('pointerdown', dragStart);
+    targetedElement.style.outline = '1px solid blue';
+  }
   let parents = $('#element-selector');
   // Remove all children
   parents.innerHTML = '';
@@ -161,6 +165,8 @@ play.addEventListener('click', function(evt) {
 
 function updatePlayState(shouldPlay) {
   let animation = animations[0]; // Bit hacky
+  if ((animation.playState != 'paused') == shouldPlay)
+    return;
   if (shouldPlay) {
     for (let anim of animations)
       anim.play();
@@ -211,7 +217,7 @@ function drawAnimations() {
 function drawAnimation(parentElement, animation) {
     // copy template for foo.
     let elem = $('#foo').content.cloneNode(true);
-    $(elem,'.timing').innerHTML=`<div class="timings">${JSON.stringify(animation.effect.getTiming())}</div>`
+    // $(elem,'.timing').innerHTML=`<div class="timings">${JSON.stringify(animation.effect.getTiming())}</div>`
     const keyframesViewSVG = $(elem, '.keyframes svg');
 
     function drawCircle(x) {
@@ -220,15 +226,41 @@ function drawAnimation(parentElement, animation) {
         circle.setAttribute('cx', x);
         circle.setAttribute('cy', 10);
         circle.style.stroke = 'blue';
+        circle.style.fill = 'blue';
+
         circle.setAttribute('r', 5);
         keyframesViewSVG.appendChild(circle);
         return circle;
     }
 
-    for (let keyframe of animation.effect.getKeyframes()){
-        const circle = drawCircle(`${keyframe.computedOffset * 100}%`);
+    function drawLine(x1, x2) {
+        const line = svg('line');
+        line.setAttribute('x1', x1);
+        line.setAttribute('x2', x2);
+        line.setAttribute('y1', 10);
+        line.setAttribute('y2', 10);
+        line.setAttribute('x1', x1);
+        line.style.stroke = 'lightblue';
+        line.style.strokeWidth = 2;
+
+        keyframesViewSVG.appendChild(line);
+        return line;
     }
 
+    const keyframes = animation.effect.getKeyframes();
+    for (let i = 0; i < keyframes.length; i++){
+        const keyframe = keyframes[i];
+        const x1 = `${keyframe.computedOffset * 100}%`;
+        if (i < keyframes.length - 1) {
+            const x2 = `${keyframes[i+1].computedOffset * 100}%`
+            drawLine(x1, x2);
+        }
+        const circle = drawCircle(x1);
+    }
     parentElement.appendChild(elem);
 }
 
+
+showKeyframe(keyframe) {
+    
+}

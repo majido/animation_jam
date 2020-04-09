@@ -7,7 +7,9 @@
   --text: rgb(198,198,198);
   --brand: hsl(330, 60%, 71%);
   --light: hsl(120, 50%, 50%);
-  --border: hsl(290, 80%, 55%)
+  --border: hsl(290, 80%, 55%);
+
+  --timeline-width: 90%
 }
 @media (color-index: 70) {
 :root {
@@ -64,17 +66,20 @@ body {
 }
 #app #timeline {
     width: 90%;
+    width: var(--timeline-width);
   }
 #app #animations {
     list-style-type: none;
-    padding: 0 0 0 10px;
+    padding: 0 0 0 0px;
     margin: 0 
   }
 #app #animations li {
       border-bottom: 1px dashed grey;
     }
 #app .keyframes svg {
-    padding: 0 10%;
+    padding: 0;
+    width: 90%;
+    width: var(--timeline-width);
     height: 40px; 
   }
 #app {
@@ -83,10 +88,10 @@ body {
 
 }
 #app .keyframes svg circle[cx="0%"] {
-    transform: translateX(10px);
+    transform: translateX(6px);
   }
 #app .keyframes svg circle[cx="100%"] {
-    transform: translateX(-10px);
+    transform: translateX(-6px);
   }
 #app:hover {
     border: 1px solid yellow;
