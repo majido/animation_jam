@@ -58,6 +58,29 @@ body {
     width: 90%;
   }
 
+  & #animations {
+    list-style-type: none;
+    padding: 0 0 0 10px;
+    margin: 0;
+    & li {
+      border-bottom: 1px dashed grey;
+    } 
+  }
+
+  & .keyframes svg {
+    padding: 0 10%;
+    height: 40px; 
+  }
+
+  /* Adjust first and last child so they are inside */
+  & .keyframes svg circle[cx="0%"] {
+    transform: translateX(10px);
+  }
+
+  & .keyframes svg circle[cx="100%"] {
+    transform: translateX(-10px);
+  }
+
 }
 
 #app:hover {

@@ -12,15 +12,33 @@
     <link rel="stylesheet" href="bundle.css">
   </head>
   <body>
+    <template id="foo">
+      <div>
+        <div class="timing"></div> 
+        <div class="keyframes">
+          <svg></svg>
+        </div>
+      </div>
+    </template>
+    <template id="element-item">
+      <div class="element name"></div>
+    </template>
     <section id="sandbox">
       <div class="box" id="example">One</div>
+      <div class="box">Two</div>
     </section>
 
     <section id="app">
       Timeline 
       <input id="play" type="button" value="Play ▶" alt="Play"></button>
       <input id="timeline" type="range" min=0 max=100></input>
-      
+      Animations:
+      <ul id="animations">
+
+      </ul>
+      Selector:
+      <div id="element-selector">
+      </div>
     </section>
 
     <script src="bundle.js" type="module" defer></script>
