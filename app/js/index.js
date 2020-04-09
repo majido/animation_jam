@@ -151,7 +151,7 @@ const app = document.querySelector("#app");
 const timeline = app.querySelector("#timeline");
 const play = app.querySelector("#play");
 const animationsView = app.querySelector("#animations");
-
+const keyframeView = app.querySelector("#keyframe");
 
 timeline.addEventListener('input', function(evt) {
   const progress = evt.target.value;
@@ -220,6 +220,23 @@ function drawAnimation(parentElement, animation) {
     // $(elem,'.timing').innerHTML=`<div class="timings">${JSON.stringify(animation.effect.getTiming())}</div>`
     const keyframesViewSVG = $(elem, '.keyframes svg');
 
+    const keyframes = animation.effect.getKeyframes();
+    for (let i = 0; i < keyframes.length; i++){
+        const keyframe = keyframes[i];
+        const x1 = `${keyframe.computedOffset * 100}%`;
+        if (i < keyframes.length - 1) {
+            const x2 = `${keyframes[i+1].computedOffset * 100}%`
+            drawLine(x1, x2);
+        }
+        const circle = drawCircle(x1);
+
+        circle.addEventListener('click', (evt) => {
+            //evt.target.classList.add('selected');
+            showKeyframe(keyframe);
+        });
+    }
+    parentElement.appendChild(elem);
+
     function drawCircle(x) {
         const circle = svg('circle');
         circle.classList.add('my-class');
@@ -246,21 +263,11 @@ function drawAnimation(parentElement, animation) {
         keyframesViewSVG.appendChild(line);
         return line;
     }
-
-    const keyframes = animation.effect.getKeyframes();
-    for (let i = 0; i < keyframes.length; i++){
-        const keyframe = keyframes[i];
-        const x1 = `${keyframe.computedOffset * 100}%`;
-        if (i < keyframes.length - 1) {
-            const x2 = `${keyframes[i+1].computedOffset * 100}%`
-            drawLine(x1, x2);
-        }
-        const circle = drawCircle(x1);
-    }
-    parentElement.appendChild(elem);
 }
 
 
-showKeyframe(keyframe) {
-    
+function showKeyframe(keyframe) {
+    keyframeView.innerHTML =`
+        <tt>${keyframe.computedOffset * 100}% - ${keyframe.transform}</tt>`;
+    console.log(keyframe);
 }
