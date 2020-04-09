@@ -25,6 +25,24 @@ body {
   min-height: 100vh;
   display: grid;
   place-items: center;
+
+}
+
+#content {
+    display: flex;
+
+  & div {
+    margin: 10px;
+  }
+}
+
+
+#app {
+  border: 1px solid white;
+  transition: 1s border;
+}
+#app:hover {
+    border: 1px solid yellow;
 }
 
 .box {

@@ -34,6 +34,20 @@ body {
   align-items: center;
   justify-items: center;
   place-items: center;
+
+}
+#content {
+    display: flex
+}
+#content div {
+    margin: 10px;
+  }
+#app {
+  border: 1px solid white;
+  transition: 1s border;
+}
+#app:hover {
+    border: 1px solid yellow;
 }
 .box {
   width: 100px;
