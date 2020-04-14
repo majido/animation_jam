@@ -1,4 +1,5 @@
-[![Netlify Status](https://api.netlify.com/api/v1/badges/59a03ed4-bf70-4441-b65c-200bcd61c013/deploy-status)](https://app.netlify.com/sites/shortstax/deploys)
+A Simple Animation Editor.
+
 
 ### Javascript ›
 [Rollup](https://rollupjs.org) to **bundle**, **treeshake**, **import from NPM, local or URLs**, and **import CSS**. 
@@ -11,13 +12,12 @@
 
 <br>
 
-> Watch me break it down on [YouTube!](https://links.argyle.ink/shortstack)
+We are using [shortstack](https://github.com/shortstack) as a starting point!
+> Watch Adam Argyle break it down on [YouTube!](https://links.argyle.ink/shortstack)
 
 <br><br>
 
 ## Getting Started
-1. `mkdir new-project-name && cd $_`
-1. `git clone --depth=1 https://github.com/argyleink/shortstack.git . && rm -rf ./.git`
 1. `npm i`
 1. `npm start`
 

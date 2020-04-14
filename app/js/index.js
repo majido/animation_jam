@@ -1,39 +1,18 @@
 'use strict';
 // import Whatever from 'https://unpkg.com/whatever'
 // import Whatever from 'whatever'
-
 // import { default as index_css }  from './css/index.css'
 
-// import {h, render } from 'https://unpkg.com/preact?module';
-// import {App} from './app.js'
-
-// // console.info(index_css)
-// console.log('💀🤘')
-// render(h(App), document.getElementById("app"));
-
-
 // Utility
+import {$, svg} from './utils.js'
 
+// Components
+import { drawAnimations } from './animations.js'
+import { drawTimeline } from '../timeline.js';
 
-function $(/* args */) {
-    let root = document;
-    let query = arguments[0];
-    if (arguments[0] instanceof Element || arguments[0] instanceof DocumentFragment) {
-        root = arguments[0];
-        query = arguments[1];
-    }
-    return root.querySelector(query);
-}
-
-function svg(type) {
-    return document.createElementNS('http://www.w3.org/2000/svg', type);
-}
 
 // Setup
 // Animate content to have a running sample to work with
-
-
-
 
 const sandbox = document.querySelector("#sandbox");
 for (let box of sandbox.querySelectorAll(".box")) {
@@ -46,9 +25,19 @@ for (let box of sandbox.querySelectorAll(".box")) {
 }
 
 // Actual app code
+const animations = document.getAnimations({subtree: true});
+const app = document.querySelector("#app");
+
+drawTimeline(animations, app);
+
+function updateAnimations() {
+  drawAnimations(animations, app);
+}
+updateAnimations();
+
+// TODO: Move selection logic into its own component 
 let selectedElement;
 let targetedElement;
-let animations;
 const EPSILON = 0.001;
 
 function dragStart(evt) {
@@ -56,6 +45,7 @@ function dragStart(evt) {
   // TODO: Get the animation from animations associated with evt.target
   let animation = evt.target.getAnimations()[0];
   // Get a keyframe for the current time
+  // TODO: There is a bug here where currentTime can be larger than duration.
   let currentOffset = animation.currentTime / animation.effect.getTiming().duration;
   let keyframes = animation.effect.getKeyframes();
   let keyframe;
@@ -81,7 +71,7 @@ function dragStart(evt) {
     let delta = [evt.clientX - start[0], evt.clientY - start[1]];
     keyframe.transform = 'translate(' + delta[0] + 'px, ' + delta[1] + 'px) ' + currentTransform;
     animation.effect.setKeyframes(keyframes);
-    drawAnimations();
+    updateAnimations();
   }
 
   function dragEnd(evt) {
@@ -145,129 +135,3 @@ document.addEventListener('pointerdown', (evt) => {
   selectElement(evt.target);
 });
 
-animations = document.getAnimations({subtree: true});
-
-const app = document.querySelector("#app");
-const timeline = app.querySelector("#timeline");
-const play = app.querySelector("#play");
-const animationsView = app.querySelector("#animations");
-const keyframeView = app.querySelector("#keyframe");
-
-timeline.addEventListener('input', function(evt) {
-  const progress = evt.target.value;
-  updateCurrentTime(parseInt(progress))
-});
-
-play.addEventListener('click', function(evt) {
-  let animation = animations[0]; // Bit hacky
-  updatePlayState(animation.playState == 'paused');
-});
-
-function updatePlayState(shouldPlay) {
-  let animation = animations[0]; // Bit hacky
-  if ((animation.playState != 'paused') == shouldPlay)
-    return;
-  if (shouldPlay) {
-    for (let anim of animations)
-      anim.play();
-    play.value = "Pause";
-    updateTimeline(document.timeline.currentTime);
-  } else {
-    for (let anim of animations)
-      anim.pause();
-    play.value = "Play ▶";
-  }
-}
-
-function updateTimeline(frameTime) {
-  // Update timeline to current time
-  let animation = animations[0]; // Bit hacky
-  if (animation.playState == 'paused')
-    return;
-  const duration = animation.effect.getTiming().duration;
-  timeline.value = (animation.currentTime % duration) * 100 / duration;
-  requestAnimationFrame(updateTimeline);
-}
-requestAnimationFrame(updateTimeline);
-console.log(animations);
-
-// we have to do this anytime our animations get updated
-drawAnimations();
-
-// progress is between 0-100
-function updateCurrentTime(progress) {
-  updatePlayState(false);
-  for (let animation of animations) {
-        // TODO: Use finite time length and allow extending animations.
-        const duration = animation.effect.getTiming().duration;
-        animation.currentTime = duration * progress/100;
-    }
-}
-
-function drawAnimations() {
-    animationsView.innerHTML = "";
-    for (let animation of animations) {
-        const li = document.createElement('li');
-        drawAnimation(li, animation);
-        animationsView.appendChild(li);
-    }
-}
-
-// Drawing animation keyframes
-function drawAnimation(parentElement, animation) {
-    // copy template for foo.
-    let elem = $('#foo').content.cloneNode(true);
-    // $(elem,'.timing').innerHTML=`<div class="timings">${JSON.stringify(animation.effect.getTiming())}</div>`
-    const keyframesViewSVG = $(elem, '.keyframes svg');
-
-    const keyframes = animation.effect.getKeyframes();
-    for (let i = 0; i < keyframes.length; i++){
-        const keyframe = keyframes[i];
-        const x1 = `${keyframe.computedOffset * 100}%`;
-        if (i < keyframes.length - 1) {
-            const x2 = `${keyframes[i+1].computedOffset * 100}%`
-            drawLine(x1, x2);
-        }
-        const circle = drawCircle(x1);
-
-        circle.addEventListener('click', (evt) => {
-            //evt.target.classList.add('selected');
-            showKeyframe(keyframe);
-        });
-    }
-    parentElement.appendChild(elem);
-
-    function drawCircle(x) {
-        const circle = svg('circle');
-        circle.classList.add('my-class');
-        circle.setAttribute('cx', x);
-        circle.setAttribute('cy', 10);
-        circle.style.stroke = 'blue';
-        circle.style.fill = 'blue';
-
-        circle.setAttribute('r', 5);
-        keyframesViewSVG.appendChild(circle);
-        return circle;
-    }
-
-    function drawLine(x1, x2) {
-        const line = svg('line');
-        line.setAttribute('x1', x1);
-        line.setAttribute('x2', x2);
-        line.setAttribute('y1', 10);
-        line.setAttribute('y2', 10);
-        line.setAttribute('x1', x1);
-        line.style.stroke = 'lightblue';
-        line.style.strokeWidth = 2;
-
-        keyframesViewSVG.appendChild(line);
-        return line;
-    }
-}
-
-
-function showKeyframe(keyframe) {
-    keyframeView.innerHTML =`
-        <tt>${keyframe.computedOffset * 100}% - ${keyframe.transform}</tt>`;
-    console.log(keyframe);
-}
