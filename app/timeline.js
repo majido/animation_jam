@@ -23,12 +23,12 @@ export function drawTimeline(animations, app) {
         if (shouldPlay) {
             for (let anim of animations)
                 anim.play();
-            play.value = "Pause";
+            play.value = "Pause ⏸";
             updateTimeline(document.timeline.currentTime);
         } else {
             for (let anim of animations)
                 anim.pause();
-            play.value = "Play ▶";
+            play.value = "Play ▶️";
         }
     }
 

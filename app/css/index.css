@@ -6,6 +6,8 @@
 
 :root {
   --surface: gray(10);
+  --surface-accent: gray(12);
+
   --text: gray(80);
   --brand: hsl(330 60% 71%);
   --light: hsl(120 50% 50%);
@@ -15,6 +17,8 @@
 
   @media (prefers-color-scheme: light) {
     --surface: gray(98);
+    --surface-accent: gray(95);
+
     --text: gray(30);
     --brand: hsl(330 100% 71%);
   }
@@ -63,6 +67,16 @@ body {
   background: rgba(255, 255, 255, 0.7);
   backdrop-filter: blur(15px);
 
+  & section  {
+    & h2 {
+      font-size: 1em;
+      margin: 4px 0;
+      padding: 4px;
+      background-color: var(--surface-accent);
+    }
+    margin-bottom: 10px;
+  }
+
   & #timeline {
     width: var(--timeline-width);
   }
@@ -78,7 +92,7 @@ body {
 
     & .keyframes svg {
       padding: 0;
-      height: 40px; 
+      height: 1em; 
       width: 100%;
       & circle.selected {
         fill: green !important;

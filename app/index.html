@@ -33,18 +33,26 @@
     </section>
 
     <section id="app">
-      Timeline 
-      <input id="play" type="button" value="Play ▶" alt="Play"></button>
-      <input id="timeline" type="range" min=0 max=100></input>
-      Animations:
-      <ul id="animations">
-
-      </ul>
-      Keyframe:
-      <div id="keyframe"></div>
-      Selector:
-      <div id="element-selector">
-      </div>
+      <section>
+        <h2>
+          Timeline 
+          <input id="play" type="button" value="Pause ⏸" alt="Play"></button>
+        </h2>
+        <input id="timeline" type="range" min=0 max=100></input>
+      </section>
+      <section>
+        <h2>Animations</h2>
+        <ul id="animations">
+        </ul>
+      </section>
+      <section>
+        <h2>Keyframe</h2>
+        <div id="keyframe"></div>
+      </section>
+      <section>
+        <h2>Selector</h2>
+        <div id="element-selector"></div>
+      </section>
     </section>
 
     <script src="bundle.js" type="module" defer></script>

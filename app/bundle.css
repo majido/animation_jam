@@ -4,6 +4,8 @@
 /* also, use any of these! https://easings.net */
 :root {
   --surface: rgb(27,27,27);
+  --surface-accent: rgb(31,31,31);
+
   --text: rgb(198,198,198);
   --brand: hsl(330, 60%, 71%);
   --light: hsl(120, 50%, 50%);
@@ -14,6 +16,8 @@
 @media (color-index: 70) {
 :root {
     --surface: rgb(249,249,249);
+    --surface-accent: rgb(241,241,241);
+
     --text: rgb(71,71,71);
     --brand: hsl(330, 100%, 71%)
 }
@@ -21,6 +25,8 @@
 @media (prefers-color-scheme: light) {
 :root {
     --surface: rgb(249,249,249);
+    --surface-accent: rgb(241,241,241);
+
     --text: rgb(71,71,71);
     --brand: hsl(330, 100%, 71%)
 }
@@ -70,6 +76,16 @@ body {
   -webkit-backdrop-filter: blur(15px);
           backdrop-filter: blur(15px)
 }
+#app section h2 {
+      font-size: 1em;
+      margin: 4px 0;
+      padding: 4px;
+      background-color: rgb(31,31,31);
+      background-color: var(--surface-accent);
+    }
+#app section  {
+    margin-bottom: 10px;
+  }
 #app #timeline {
     width: 90%;
     width: var(--timeline-width);
@@ -86,7 +102,7 @@ body {
     }
 #app #animations .keyframes svg {
       padding: 0;
-      height: 40px; 
+      height: 1em; 
       width: 100%
     }
 #app #animations .keyframes svg circle.selected {
