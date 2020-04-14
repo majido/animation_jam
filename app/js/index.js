@@ -8,7 +8,7 @@ import {$, svg} from './utils.js'
 
 // Components
 import { drawAnimations } from './animations.js'
-import { drawTimeline } from '../timeline.js';
+import { drawTimeline } from './timeline.js';
 
 
 // Setup
