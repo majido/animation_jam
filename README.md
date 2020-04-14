@@ -1,4 +1,4 @@
-A Simple Animation Editor.
+A Simple Animation Editor. [Try it!](https://majido.github.io/animation_jam/app/index.html)
 
 This is just a fun playground and not a serious project.
 
