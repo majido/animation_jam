@@ -42,7 +42,6 @@ export function drawTimeline(animations, app) {
         requestAnimationFrame(updateTimeline);
     }
 
-
     // progress is between 0-100
     function updateCurrentTime(progress) {
         updatePlayState(false);

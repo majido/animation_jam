@@ -1,5 +1,6 @@
 A Simple Animation Editor.
 
+This is just a fun playground and not a serious project.
 
 ### Javascript ›
 [Rollup](https://rollupjs.org) to **bundle**, **treeshake**, **import from NPM, local or URLs**, and **import CSS**. 
