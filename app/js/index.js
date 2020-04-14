@@ -45,8 +45,8 @@ function dragStart(evt) {
   // TODO: Get the animation from animations associated with evt.target
   let animation = evt.target.getAnimations()[0];
   // Get a keyframe for the current time
-  // TODO: There is a bug here where currentTime can be larger than duration.
-  let currentOffset = animation.currentTime / animation.effect.getTiming().duration;
+  const duration = animation.effect.getTiming().duration;
+  let currentOffset = ((animation.currentTime % duration)/ duration);
   let keyframes = animation.effect.getKeyframes();
   let keyframe;
   let currentTransform = getComputedStyle(evt.target).transform;

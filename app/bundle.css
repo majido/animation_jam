@@ -27,6 +27,7 @@
   }
 body {
   margin: 0;
+  padding: 1em;
   background: rgb(27,27,27);
   background: var(--surface);
   color: rgb(198,198,198);
@@ -34,15 +35,19 @@ body {
   font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif;
   min-height: 100vh;
   display: grid;
-  align-items: center;
-  justify-items: center;
-  place-items: center;
   /* hack */
   overflow: hidden;
 }
 #sandbox {
   height: 50vh;
-  display: flex
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-items: center;
+  place-items: center;
+  justify-content: center;
+  border: 1px dashed hsl(290, 80%, 55%);
+  border: 1px dashed var(--border)
 }
 #sandbox div {
     margin: 10px;
@@ -58,13 +63,9 @@ body {
   border: 1px solid var(--border);
 }
 #app {
-  position: absolute;
-  bottom: 0;
-  border: 1px solid white;
-  transition: 1s border;
   height: 50vh;
   width: 100%;
-
+  padding: 1em;
   background: rgba(255, 255, 255, 0.7);
   -webkit-backdrop-filter: blur(15px);
           backdrop-filter: blur(15px)
@@ -74,6 +75,8 @@ body {
     width: var(--timeline-width);
   }
 #app #animations {
+    width: 90%;
+    width: var(--timeline-width);
     list-style-type: none;
     padding: 0 0 0 0px;
     margin: 0
@@ -83,9 +86,8 @@ body {
     }
 #app #animations .keyframes svg {
       padding: 0;
-      width: 90%;
-      width: var(--timeline-width);
-      height: 40px
+      height: 40px; 
+      width: 100%
     }
 #app #animations .keyframes svg circle.selected {
         fill: green !important;
