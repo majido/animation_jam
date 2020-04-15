@@ -13,7 +13,7 @@
   --light: hsl(120 50% 50%);
   --border: hsl(290 80% 55%);
 
-  --timeline-width: 90%;
+  --timeline-width: 98%;
 
   @media (prefers-color-scheme: light) {
     --surface: gray(98);
@@ -62,7 +62,6 @@ body {
 
 #app {
   height: 50vh;
-  width: 100%;
   padding: 1em;
   background: rgba(255, 255, 255, 0.7);
   backdrop-filter: blur(15px);
